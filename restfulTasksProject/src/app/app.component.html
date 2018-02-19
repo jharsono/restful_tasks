@@ -1,0 +1,51 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <div id="get-all">
+  <button (click)="getTasksFromService()">Get all tasks</button>
+      <div *ngFor="let task of tasks.data" class=task>
+        <h2>{{ task.title }}</h2>
+        <p>
+          {{task.description}}
+        </p>
+        <button (click)="populateEditField(task)">Edit</button> <!-- get the task, pass in the entire task object -->
+        <button (click)="delete(task._id)">Delete</button>
+
+
+      </div>
+
+  </div>
+  <!-- <div id="find-one">
+    <h2>Find one task</h2>
+    <input type="text" name="find-one">
+    <button (click)="getOne()">find one task</button>
+    <ul> -->
+      <!-- <li *ngFor="let one of task">
+        {{ one.title }} - {{one.description}}
+      </li>
+    </ul>
+  </div> -->
+  <div *ngIf="toggleEdit" id="edit" class="task">
+    <h2>EDIT</h2>
+    Title:<h3>{{ editTask.title }}</h3>
+    Description:<p>
+      {{ editTask.description }}
+    </p>
+    <form (submit) = "update()">
+      Title: <input type="text" name="editTask.title" [(ngModel)]="editTask.title"  >
+      Description: <input  type="text" name="editTask.description" [(ngModel)]="editTask.description">
+      <input type="submit" value = "Update Task" />
+      <button (click)="toggleEditForm()">Cancel</button>
+    </form>
+
+  </div>
+  <div id="add">
+    <h2>Add a new Task</h2>
+    <form (submit) = "addTask()">
+      Title: <input [(ngModel)]="newTask.title" type="text" name="newTask.title">
+      Description: <input [(ngModel)]="newTask.description" type="text" name="newTask.description" >
+      <input type="submit" value = "Add New Task" />
+    </form>
+
+
+  </div>
+</div>
